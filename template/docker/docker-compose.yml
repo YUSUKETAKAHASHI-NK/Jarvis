@@ -1,0 +1,16 @@
+version: "2.3"
+services:
+  jupyterlab:
+    build:
+      context: .
+    user: root
+    runtime: nvidia
+    ports:
+      - "8888:8888"
+    volumes:
+      - "~/Projects:/home/jovyan/work" # ← notebookをホストと共有したいためディレクトリをマウント
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+ #     NB_UID: 1000 # ← 作業するユーザーのUID 私の環境では500だったので500を指定
+ #     GRANT_SUDO: "yes"
+    command: start.sh jupyter lab
